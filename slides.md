@@ -167,6 +167,7 @@ layout: two-cols
   - Podcasts (Latest tech news)
   - Tim Ferriss+Lex Friedman (any life)
   - Health: Crossfit+ATG (exercise)
+- More info [at my Github page](https://github.com/EspenAlbert)
 
 
 ---
@@ -412,10 +413,131 @@ layout: two-cols
 ## Staticfiles, CDN, APIs, CORS, and SPA how do you do the routing?
 
 - Any suggestions?
+<v-click>
+
 - Fell on my face quite hard
   - Splitting the API into more services got complicated
+  - CORS (Cross Origin Resource Sharing)
+    - Where to add the headers?
+
+</v-click>
 
 ---
+layout: image
+image: ./images/routing.png
+backgroundSize: contain
+---
+<div class="ml-8">
+
+## My Solution
+
+
+<Transform :scale="0.65">
+
+### Cloudfront
+
+<v-clicks>
+
+- AWS WAF? No
+  - Minimum price of 5$ + 1$ per rule
+- SSL/TLS managed by AWS
+- Origins
+  - HTTP -> HTTPS redirect
+  - Choose caching behavior
+    - Managed-CachingOptimized
+    - Managed-CachingDisabled
+  - Choose Response headers policy
+    - Managed-AllViewerExceptHostHeader (believe due to gateway routing)
+    - Managed-CORS-CustomOrigin
+- Can hook into the request stages with Function associations
+  - CloudFront Functions?
+  - [Lambda@Edge]([text](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-how-it-works.html))
+  - Hook points
+
+</v-clicks>
+
+<Transform :scale="0.65" class="ml-8">
+
+<v-click>
+
+![cloudfront](images/cloudfront.png)
+
+</v-click>
+
+</Transform>
+
+
+</Transform>
+
+</div>
+---
+layout: image
+image: ./images/routing_lambda.png
+backgroundSize: contain
+---
+
+<div class="ml-8">
+
+#### Lambda @ Edge
+
+<v-click>
+
+```python{all|7-10|1-3,11-13|14-}
+ALL_S3_DOCUMENTS = set(['CodeLazy.js', 'CodeLazy.js.map', 'MarkdownLazy.js', 
+'MarkdownLazy.js.map', 'index.css', 'index.html', 
+'index.js', 'index.js.map'])
+
+def lambda_handler(event, context) -> dict | None:
+    """based on example: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-examples.html#lambda-examples-redirect-to-signin-page"""
+    request: dict = event["Records"][0]["cf"]["request"]
+    path = request["uri"]
+    print(f"path is: {path}")
+    s3_path = path.lstrip("/")
+    if s3_path in ALL_S3_DOCUMENTS:
+        print(f"no redirection {s3_path} exist")
+        return request
+    print("returning html directly")
+    return {
+        "status": "200",
+        "statusDescription": "OK",
+        "body": _html,
+        "bodyEncoding": "text",
+        "headers": {
+            "content-type": [
+                {
+                    "value": "text/html;charset=UTF-8",
+                }
+            ]
+        },
+    }
+```
+
+</v-click>
+
+</div>
+
+---
+
+- inside of python script: `_html=`
+```html{all|6|7-8}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommitStats Landing Page</title>
+    <script type="module" crossorigin src="/index.js"></script>
+    <link rel="stylesheet" crossorigin href="/index.css">
+  </head>
+  <body>
+    <div id="root" class="highcharts-light"></div>
+  </body>
+</html>
+```
+
+---
+
+<!-- continue: ask if anyone have experience operating multiple API Gateway stages -->
 
 ## Database technology?
 ---
