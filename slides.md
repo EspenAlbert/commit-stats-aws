@@ -9,9 +9,6 @@ title: Commit Stats AWS UG
 info: |
   ## From idea to product with AWS & Python
   Created with <3
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
 # apply any unocss classes to the current slide
 class: text-center
 # https://sli.dev/custom/highlighters.html
@@ -27,18 +24,6 @@ hideInToc: true
 ---
 
 <!-- 
-- About me
-      - World map: Norway, Sweden, Spain, Thailand
-      - Activities: Calisthenics, Weightlifting, sports
-      - Career: Rocketfarm (consulting small team), wheel.me (startup), Smidige (contractor), and MongoDB (enterprise)
-      - Tech choices: Python, Terraform, Pycharm -> VsCode, Golang, MongoDB, K8s+Istio, Markdown <3
-      - Influencers: Cal (productivity & life philosophy), Podcasts (Latest tech news), Tim Ferriss+Lex Friedman (any life), Crossfit+ATG (exercise), Sam Harris (religion & meditation)
-      - Dreams: Coworking Arinaga + Activity Center for Adults
-  - Product:
-    - Show sign up workflow and End Product
-  - Architecture:
-    - Don't expect you to understand but here it is: Figma
-    - Go through the same steps
   - SaaS (non AWS):
     - MongoDB Atlas
     - InfluxDB Cloud
@@ -69,48 +54,6 @@ hideInToc: true
   - Costs
     - AWS
     - SaaS
-  - Future of the product
-    - More robust onboarding experience
-    - Open Source
-    - See website
-  - Questions? 
-Quiz?
-How many lambdas?
-How much s3 storage?
-How many AWS services?
-How much money does this cost per month?
-How many detours?
-How many users?
-How I got the job? 
-Other tools?
-Cors?
-Terraform modules? 
-Build time?
-Testing? 
-
-- Discussions
-  - SPA, routing, staticfiles
-    - FastUI
-    - Lambda @ the edge
-  - Guess how the application is deployed?
-    - Build & Deployment tools
-    - CDKTF
-    - Other parts
-  - AWS Lambda hosting size limitations & cold start
-    - Show costs of provisioned and alternative for provisioning
-  - SaaS & Database free tiers?
-    - MongoDB
-      - Flexible schema
-      - Fast to test
-      - Free
-    - InfluxDB
-      - Natural for timeseries
-      - Free Tier (or not?)
-  - Architecture diagrams?
-  - Costs & cost monitoring & AWS multi account setup?
-    - What is the most expensive part of this
-  - Presentation tools:
-    - [slidev](https://github.com/slidevjs/slidev)
 -->
 
 # From idea to product with AWS & Python
@@ -136,8 +79,8 @@ layout: two-cols
 ## About Me 1
 - Geography
   - Born and raised in Kristiansand, Norway
-  - Mom lives in Sweden
-  - Thailand, Ko Lanta (Kohub)
+  - Family in Stockholm, Sweden and siblings in Oslo, Norway
+  - 3rd home in Ko Lanta (Kohub), Thailand
   - ~4 years in Gran Canaria
   - Living with my fiancée Maria in Arinaga
 - Activities: Calisthenics, Weightlifting, sports++
@@ -165,10 +108,9 @@ layout: two-cols
 - Influenced by:
   - Cal (productivity & life philosophy)
   - Podcasts (Latest tech news)
-  - Tim Ferriss+Lex Friedman (any life)
+  - Tim Ferriss+Lex Friedman (Exposure to different thinkers)
   - Health: Crossfit+ATG (exercise)
 - More info [at my Github page](https://github.com/EspenAlbert)
-
 
 ---
 
@@ -202,7 +144,7 @@ Happy coding!
 
 ## Product Demo 1
 
-- "CV/Dashboard" of your commits across languages
+- ["CV/Dashboard" of your commits across languages](https://commit-stats.ealbert.org/cv/EspenAlbert)
 
 ![alt text](images/product_espen_cv.png)
 
@@ -265,7 +207,7 @@ layout: two-cols
 ---
 # Part 2: Behind the scenes discussions
 
-- Questions:
+- Questions we will touch on:
   1. How would you build this?
   2. Which AWS Services?
   3. Other SaaS products?
@@ -395,6 +337,8 @@ layout: two-cols
   42M python3.11/site-packages//dash
   ```
 
+  - ECR Lifecycle rules
+
 - How to choose memory size?
 - How to trigger lambdas?
   - EventBridge (CloudWatch Events)
@@ -438,7 +382,7 @@ backgroundSize: contain
 
 <v-clicks>
 
-- AWS WAF? No
+- [AWS WAF](https://us-east-1.console.aws.amazon.com/wafv2/homev2/start?region=us-east-1)? No
   - Minimum price of 5$ + 1$ per rule
 - SSL/TLS managed by AWS
 - Origins
@@ -451,7 +395,7 @@ backgroundSize: contain
     - Managed-CORS-CustomOrigin
 - Can hook into the request stages with Function associations
   - CloudFront Functions?
-  - [Lambda@Edge]([text](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-how-it-works.html))
+  - [Lambda@Edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-how-it-works.html)
   - Hook points
 
 </v-clicks>
@@ -470,6 +414,13 @@ backgroundSize: contain
 </Transform>
 
 </div>
+
+<!-- 
+1. Start by explaining the overall view
+2. Talk about cloudfront (click next)
+3. Can use the tools in chrome to inspect the network calls to see the hits
+-->
+
 ---
 layout: image
 image: ./images/routing_lambda.png
@@ -519,6 +470,7 @@ def lambda_handler(event, context) -> dict | None:
 ---
 
 - inside of python script: `_html=`
+
 ```html{all|6|7-8}
 <!doctype html>
 <html lang="en">
@@ -537,14 +489,59 @@ def lambda_handler(event, context) -> dict | None:
 
 ---
 
-<!-- continue: ask if anyone have experience operating multiple API Gateway stages -->
+## AWS Gateway
 
-## Database technology?
+- [AWS API Gateway](https://eu-west-1.console.aws.amazon.com/apigateway/main/develop/routes?api=gjwn13z2g8&integration=rnf8hmg&region=eu-west-1&routes=qls5ftn)
+- Anyone experience with multiple stages?
+
 ---
 
-## Testing? Multiple environments? CI workflows?
+## Database technology?
 
+<v-clicks>
+
+1. [MongoDB Atlas with Free Forever (up to 512MB)](https://www.mongodb.com/pricing)
+   1. Use AWS KMS to encrypt the tokens
+2. [InfluxDB Cloud Serverless ($250 in free credits for 90 days)](https://www.influxdata.com/influxdb-pricing/)
+
+</v-clicks>
+
+<v-click class="mt-5">
+
+- What DB are you using?
+
+</v-click>
+
+---
+
+## Cost of the solution?
+
+<v-clicks>
+
+- Which AWS service do you think is the most expensive?
+- KMS
+  - Stopped encrypting terraform state to save money
+- [Cost Explorer](https://us-east-1.console.aws.amazon.com/costmanagement/home?region=eu-west-1#/cost-explorer?chartStyle=STACK&costAggregate=unBlendedCost&endDate=2024-03-31&excludeForecasting=false&filter=%5B%5D&futureRelativeRange=CUSTOM&granularity=Monthly&groupBy=%5B%22Service%22%5D&historicalRelativeRange=LAST_6_MONTHS&isDefault=true&reportName=New%20cost%20and%20usage%20report&showOnlyUncategorized=false&showOnlyUntagged=false&startDate=2023-10-01&usageAggregate=undefined&useNormalizedUnits=false)
+- InfluxDB, most costly for now ($2.49 for February)
+  - Data out $0.17 for 1.88GB
+  - Data In $1.59 for 635.851 MB
+  - Query count $0.64 for 5342 queries (0.012 per 100 query executions)
+  - Storage:$0.09 for 43.461 GB-hr
+
+</v-clicks>
+
+---
+
+## Multiple environments? CI workflows?
+
+- What if you need to host stage/QA environments?
+- Recreate the full terraform with a new environment or re-use infrastructure
 - lambda versioning? aliases?
+- TF code walkthrough?
+
+---
+
+## Quality checks & Local testing
 
 ---
 
@@ -561,3 +558,4 @@ def lambda_handler(event, context) -> dict | None:
   - Andras
 - Leo for hosting us
 - Everyone for joining
+- [slidev](https://github.com/slidevjs/slidev)
