@@ -1,6 +1,9 @@
 # From idea to product with AWS & Python
 
-See [text](slides.md)
+- See [slides.md for markdown](slides.md)
+- See [pdf if you don't want to install anything](slides-export/2024_04_24_AWS_UG.pdf)
+  - Some slides might not render that nice :/
+
 
 To start the slide show:
 
