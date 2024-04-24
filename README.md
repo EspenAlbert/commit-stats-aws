@@ -1,4 +1,6 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# From idea to product with AWS & Python
+
+See [text](slides.md)
 
 To start the slide show:
 
@@ -9,3 +11,5 @@ To start the slide show:
 Edit the [slides.md](./slides.md) to see the changes.
 
 Learn more about Slidev on [documentations](https://sli.dev/).
+
+See also [Github page of slidev](https://github.com/slidevjs/slidev)
