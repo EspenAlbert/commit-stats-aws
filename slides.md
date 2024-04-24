@@ -24,6 +24,7 @@ hideInToc: true
 ---
 
 <!-- 
+- Presentation outline & Future ideas
   - SaaS (non AWS):
     - MongoDB Atlas
     - InfluxDB Cloud
@@ -66,8 +67,9 @@ hideInToc: true
 
 ## Overview
 
-<Toc v-click minDepth="1" maxDepth="1" mode="all"></Toc>
+<Toc minDepth="1" maxDepth="1" mode="all"></Toc>
 
+<!-- 5 min on the demo, the rest for discussions, ask how much time we have or when people get bored -->
 
 ---
 
@@ -82,35 +84,46 @@ layout: two-cols
   - Family in Stockholm, Sweden and siblings in Oslo, Norway
   - 3rd home in Ko Lanta (Kohub), Thailand
   - ~4 years in Gran Canaria
-  - Living with my fiancée Maria in Arinaga
+  - Resident and living with Maria in Arinaga
 - Activities: Calisthenics, Weightlifting, sports++
 - Career:
   - Rocketfarm (consulting, small team)
   - wheel.me (startup)
-  - Smidige (contractor)
+  - smidige.com (contractor)
   - MongoDB (enterprise)
 
 ::right::
 
 ![Arinaga](images/arinaga.png)
 
+<!-- 
+1. Rocketfarm: Farming and developing in a Sogndal. Nice people and work life balance. But ambitious.
+2. wheel.me: dev #1 -> 70 people. No work life balance but freedom to be anyware
+3. Smidige: waiting on work, being blocked, but freedom
+4. MongoDB: Healthy work environment with great colleagues. Quality is everything -->
+
 ---
 
 ## About Me 2
 - Tech choices:
-  - Python
-  - Terraform
-  - Pycharm -> VsCode
-  - Golang
-  - MongoDB
-  - K8s+Istio
+  - Python (since 3.6)
+  - Terraform (~ 2 years)
+  - Pycharm -> VsCode (Not worth doing the VsCode yet?)
+  - Golang (Last few months)
+  - MongoDB, PostgreSQL, InfluxDB, and DynamoDB
+  - Kubernetess+Istio+Helm (~ 4 years)
   - Markdown <3
 - Influenced by:
-  - Cal (productivity & life philosophy)
-  - Podcasts (Latest tech news)
-  - Tim Ferriss+Lex Friedman (Exposure to different thinkers)
-  - Health: Crossfit+ATG (exercise)
+  - Cal Newport (productivity & life philosophy)
+  - Podcasts (Latest tech news) & Books (Going deeper)
+  - Tim Ferriss+Lex Friedman+ Guy Raz (Exposure to different thinkers)
+  - Health: Crossfit+[ATG](https://www.atgonlinecoaching.com/) (exercise)
 - More info [at my Github page](https://github.com/EspenAlbert)
+
+<!--
+1. Cal: Computer science focused on Math professor. Deep work. Slow Productivity  
+2. Talk Python, Changelog, AWS Insiders, MongoDB
+3. -->
 
 ---
 
@@ -134,8 +147,9 @@ As I am a bit of a data nerd 🤓 I like to track different metrics.
 Not only commits, PRs, but also LoC (Lines of Code), open source contribution, 3rd-party packages, etc.
 Therefore, the two main goals of the project are:
 
-1. Support creating a "CV" page of your commit stats that you can use when applying for jobs
-2. (Future) Support weekly feedback on your code and reflect on your developer journey
+> 1. **Support creating a "CV" page of your commit stats that you can use when applying for jobs**
+> 2. **(Future) Support weekly feedback on your code and reflect on your developer journey**
+
 
 I hope you will find it useful and fun 😎
 Happy coding!
@@ -159,6 +173,8 @@ Happy coding!
 
 ![alt text](images/product_token_steps.png)
 
+<!-- Show Add Token Page -->
+
 ---
 
 ## Product Demo 3
@@ -168,6 +184,8 @@ Happy coding!
 
 
 ![alt text](images/product_token_status.png)
+
+<!-- Add a repo here during the live demo -->
 
 ---
 
@@ -188,49 +206,30 @@ Happy coding!
 
 ---
 
+# Part 2: Behind the scenes **discussions**
+
+<Toc class="mt-5 ml-2" v-click minDepth="2" maxDepth="2" mode="current"></Toc>
+
+<!-- 
+Goal: Introduce different AWS services I used & lessons learned. Step through how to build this 
+Emphasize: The goal is discussions
+-->
+
+---
+
 ## Architecture 😱
 
 - [Figma](https://www.figma.com/file/sXDwzyzti2Q5TmNtpx7hmq/CommitStats?type=whiteboard&node-id=0-1)
 
 ![alt text](images/architecture.png)
 
----
-
-## Future of the Project
-
-- Alternative to InfluxDB for hosting
-- Improved on-boarding experience
-- [More in the `Future ideas` section](https://commit-stats.ealbert.org/)
-
----
-layout: two-cols
----
-# Part 2: Behind the scenes discussions
-
-- Questions we will touch on:
-  1. How would you build this?
-  2. Which AWS Services?
-  3. Other SaaS products?
-  4. Programming language?
-  5. Commit to deployment workflow?
-  6. Database technology?
-
-<!-- 
-::right::
-
-<div class="mt-5">
-</div>
-
-### Overview
-
-<Toc class="mt-5" v-click minDepth="2" maxDepth="2" mode="current"></Toc>
--->
+<!-- Potential discussion points: Microservices. Event-sourcing vs API calls. -->
 
 ---
 layout: two-cols
 ---
 
-## Tech stack decisions
+## Tech stack decision
 
 - What stack would you choose?
 
@@ -238,14 +237,16 @@ layout: two-cols
 
 - I'm a Python fan and inspired by Samuel Colvin starting the [pydantic company](https://github.com/pydantic)
   - [Pydantic Services Inc. emerges from stealth today with $4.7 million in seed funding led by Sequoia](https://techcrunch.com/2023/02/16/sequoia-backs-open-source-data-validation-framework-pydantic-to-commercialize-with-cloud-services/)
-- Wanted to use [FastUI](https://github.com/pydantic/FastUI)
+- Wanted to use [FastUI (FastAPI + React)](https://github.com/pydantic/FastUI)
   - [7.1k stars in a few months](https://star-history.com/#pydantic/FastUI&Date)
+- [Highcharts](https://www.highcharts.com/docs/dashboards/dashboards-with-react)
 
-<Transform :scale="0.75">
+<Transform :scale="0.50">
 
 ![alt text](images/fastUI_stars.png)
 
 </Transform>
+
 
 </v-click>
 
@@ -253,7 +254,7 @@ layout: two-cols
 
 <v-click>
 
-## Artifacts Produced
+### Artifacts Produced
 
 - classic static files
   - `index.css`
@@ -263,42 +264,26 @@ layout: two-cols
 - zip files for the lambda functions
 - or a docker image
 
-</v-click>
-<v-click>
+<div class="mt-8"/>
 
-## Tech candidates
+</v-click>
+
+<v-click >
+
+### Tech candidates
 
 - Plotly Dash
 - Your Choice?
 
 </v-click>
 
----
-
-## AWS Organization
-
-- Would you use than more than one AWS account?
-
-<v-click>
-
-- Root account
-  - Route53
-  - IAM Config
-  - ECR
-- `{Project Name}` Account: CommitStats
-  - Billing separate
-  - Need access to route53 to add DNS records
-- Terraform Basic Needs
-  - S3 with replication
-  - KMS (Optional -> can be costly)
-
-</v-click>
+<!-- Dash was slower and uglier -->
 
 ---
 layout: two-cols
 ---
 
-## How to deploy the artifacts? Lambda/ECS/EC2?
+## How to deploy the artifacts? (Lambda/ECS/EC2?)
 
 - Artifacts reminder
   - Static files (index.css|html|js ++)
@@ -337,7 +322,7 @@ layout: two-cols
   42M python3.11/site-packages//dash
   ```
 
-  - ECR Lifecycle rules
+  - [ECR Lifecycle rules](https://eu-west-1.console.aws.amazon.com/ecr/private-registry/repositories?region=eu-west-1)
 
 - How to choose memory size?
 - How to trigger lambdas?
@@ -352,19 +337,29 @@ layout: two-cols
 </v-clicks>
 </div>
 </Transform>
+
+<!-- 
+1. Why zips? Faster packaging. No requirement on an ECR (Docker Hub instead?) 
+2. Limiting costs with ECR lifecycle rule
+3. Trail and error RAM size
+4. Ask for cold start problem solutions
+-->
+
 ---
 
-## Staticfiles, CDN, APIs, CORS, and SPA how do you do the routing?
+## How do you do the routing? (Staticfiles, CDN, APIs, CORS, and SPA)
 
-- Any suggestions?
+- What AWS Services?
+
 <v-click>
 
-- Fell on my face quite hard
-  - Splitting the API into more services got complicated
-  - CORS (Cross Origin Resource Sharing)
-    - Where to add the headers?
+<Toc class="mt-5 ml-2" v-click minDepth="3"></Toc>
 
 </v-click>
+
+<!-- Worth mentioning:
+1. ALB/NL
+2. Global Accelerator -->
 
 ---
 layout: image
@@ -373,12 +368,10 @@ backgroundSize: contain
 ---
 <div class="ml-8">
 
-## My Solution
+### Routing Part 1: [Cloudfront](https://us-east-1.console.aws.amazon.com/cloudfront/v4/home?region=eu-west-1#/distributions)
 
 
 <Transform :scale="0.65">
-
-### Cloudfront
 
 <v-clicks>
 
@@ -388,11 +381,11 @@ backgroundSize: contain
 - Origins
   - HTTP -> HTTPS redirect
   - Choose caching behavior
-    - Managed-CachingOptimized
-    - Managed-CachingDisabled
+    - `Managed-CachingOptimized`
+    - `Managed-CachingDisabled`
   - Choose Response headers policy
-    - Managed-AllViewerExceptHostHeader (believe due to gateway routing)
-    - Managed-CORS-CustomOrigin
+    - `Managed-AllViewerExceptHostHeader (believe due to gateway routing)`
+    - `Managed-CORS-CustomOrigin`
 - Can hook into the request stages with Function associations
   - CloudFront Functions?
   - [Lambda@Edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-how-it-works.html)
@@ -429,11 +422,9 @@ backgroundSize: contain
 
 <div class="ml-8">
 
-#### Lambda @ Edge
+### Routing Part 2: Lambda @ Edge
 
-<v-click>
-
-```python{all|7-10|1-3,11-13|14-}
+```python{all|7-10|1-3,11-13|14-|18}
 ALL_S3_DOCUMENTS = set(['CodeLazy.js', 'CodeLazy.js.map', 'MarkdownLazy.js', 
 'MarkdownLazy.js.map', 'index.css', 'index.html', 
 'index.js', 'index.js.map'])
@@ -463,11 +454,11 @@ def lambda_handler(event, context) -> dict | None:
     }
 ```
 
-</v-click>
-
 </div>
 
 ---
+
+### Routing Part 3: Lambda @ Edge
 
 - inside of python script: `_html=`
 
@@ -487,30 +478,77 @@ def lambda_handler(event, context) -> dict | None:
 </html>
 ```
 
+<!-- Maybe someone knows better about crossorigin attribute? -->
 ---
 
-## AWS Gateway
+### Routing Part 4: API Gateway
 
 - [AWS API Gateway](https://eu-west-1.console.aws.amazon.com/apigateway/main/develop/routes?api=gjwn13z2g8&integration=rnf8hmg&region=eu-west-1&routes=qls5ftn)
 - Anyone experience with multiple stages?
+---
+
+### Routing Part 5: Lessons Learned
+
+<v-clicks>
+
+- Tip: Avoid splitting up APIs if you can
+  - Fell on my face quite hard
+    - CORS (Cross Origin Resource Sharing)
+      - Where to add the headers?
+      - Do one thing at a time
+- Tip: Invalidating cache
+  - Anyone knows how to do it with Terraform?
+
+</v-clicks>
 
 ---
 
-## Database technology?
+## SaaS products?
 
 <v-clicks>
+
+### Database?
 
 1. [MongoDB Atlas with Free Forever (up to 512MB)](https://www.mongodb.com/pricing)
    1. Use AWS KMS to encrypt the tokens
 2. [InfluxDB Cloud Serverless ($250 in free credits for 90 days)](https://www.influxdata.com/influxdb-pricing/)
+3. Alternatives
+   1. Elasticsearch
+   2. RDS (PostgreSQL)
+   3. DynamoDB
+   4. DocumentDB?
+
+### Message Queue alternatives?
+
+1. EventBridge
+2. [Kafka (Confluence)](https://www.confluent.io/cloud-kafka)
+3. Redis?
+4. [RabbitMQ](https://www.cloudamqp.com/)
 
 </v-clicks>
 
-<v-click class="mt-5">
+---
 
-- What DB are you using?
+## AWS Organization?
+
+- Would you use than more than one AWS account?
+
+<v-click>
+
+- Root account
+  - Route53
+  - IAM Config
+  - ECR
+- `{Project Name}` Account: CommitStats
+  - Billing separate
+  - Need access to route53 to add DNS records (Terraform and `assume_role` to the rescue)
+- Terraform Basic Needs
+  - S3 with replication
+  - KMS (Optional -> can be costly)
 
 </v-click>
+
+<!-- Out of scope to talk about a professional company -->
 
 ---
 
@@ -530,22 +568,41 @@ def lambda_handler(event, context) -> dict | None:
 
 </v-clicks>
 
+<!-- Mention story about being a student, pushing credentials, and having a 20k bill over night -->
+
 ---
 
 ## Multiple environments? CI workflows?
 
 - What if you need to host stage/QA environments?
-- Recreate the full terraform with a new environment or re-use infrastructure
+  - Recreate the full terraform with a new environment or re-use infrastructure
 - lambda versioning? aliases?
-- TF code walkthrough?
+- Time for a live deployment?
 
 ---
 
 ## Quality checks & Local testing
 
+- Time for a demo?
+
+---
+
+
+## Future of the Project
+
+- Alternative to InfluxDB for hosting
+- Improved on-boarding experience
+- [More in the `Future ideas` section](https://commit-stats.ealbert.org/)
+
 ---
 
 # Questions?
+
+- Observability tools?
+  - Sentry?
+  - OTEL - Open Telemetry
+  - ELK (Elasticsearch, Logstash, Kibana)
+  - Cloudwatch
 
 
 ---
